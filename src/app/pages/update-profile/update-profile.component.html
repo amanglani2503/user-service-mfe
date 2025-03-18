@@ -1,0 +1,48 @@
+<div class="container">
+    <h2>Manage Profile</h2>
+  
+    <form #profileForm="ngForm" (ngSubmit)="onSubmit()">
+  
+      <!-- Name Field -->
+      <div>
+        <label>Name</label>
+        <input type="text" name="name" [(ngModel)]="user.name" #name="ngModel" required />
+        <small *ngIf="name.invalid && name.touched" class="error">Name is required</small>
+      </div>
+  
+      <!-- Email Field -->
+      <div>
+        <label>Email</label>
+        <input type="email" name="email" [(ngModel)]="user.email" #email="ngModel" required email />
+        <small *ngIf="email.invalid && email.touched" class="error">Enter a valid email</small>
+      </div>
+  
+      <!-- Password Field -->
+      <div>
+        <label>New Password</label>
+        <input type="password" name="password" [(ngModel)]="user.password" #password="ngModel" />
+      </div>
+  
+      <!-- Confirm Password Field -->
+      <div>
+        <label>Confirm New Password</label>
+        <input type="password" name="confirmPassword" [(ngModel)]="user.confirmPassword" #confirmPassword="ngModel" />
+        <small *ngIf="user.password && user.password !== user.confirmPassword && confirmPassword.touched" class="error">
+          Passwords do not match
+        </small>
+      </div>
+  
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+      </div>
+  
+      <!-- Success Message -->
+      <div *ngIf="successMessage" class="success">
+        {{ successMessage }}
+      </div>
+  
+      <button type="submit" [disabled]="profileForm.invalid">Update Profile</button>
+    </form>
+  </div>
+  
